@@ -4,6 +4,7 @@ import addTask from '../../public/icon-add-task-mobile.svg'
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import BoardDropdown from "./Dropdown";
 import ellipses from "../../public/icon-vertical-ellipsis.svg"
+import { testData } from "../config";
 import {
   openNavModal,
   getPageTitle,
@@ -21,11 +22,11 @@ interface Column {
 export function Navbar() {
   const pageTitle = useAppSelector(getPageTitle);
   console.log(pageTitle);
-  
+
   const [show, setShow] = useState<boolean>(false);
-  const { data, isLoading } = useFetchDataFromDbQuery();
-  console.log(data);
-  
+  let { data, isLoading } = useFetchDataFromDbQuery();
+  data = testData;
+
   const [columns, setColumns] = useState<Column[]>([]);
   const dispatch = useAppDispatch();
 
@@ -40,7 +41,7 @@ export function Navbar() {
         <div className="border-b-2 w-full pr-[2.12rem] flex justify-between items-center">
           {!isLoading ? (
             <p className="text-xl capitalize text-white font-bold pl-6">
-              No Board(s) yet
+              {pageTitle ? pageTitle : 'No board(s) yet'}
             </p>
           ) : (
             <SkeletonTheme
@@ -69,7 +70,7 @@ export function Navbar() {
                     })
                   )
                   : ""
-            }}
+              }}
               className="bg-main-purple text-white px-4 py-2 flex rounded-3xl items-center space-x-2"
             >
               <img src={addTask} alt="icon-add-task" />
