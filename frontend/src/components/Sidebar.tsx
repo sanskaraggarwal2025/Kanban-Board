@@ -9,13 +9,10 @@ import "react-loading-skeleton/dist/skeleton.css";
 import iconBoardPurple from "../../public/icon-board-purple.png"
 import SidebarFooter from "./SidebarFooter";
 import iconShowSidebar from "../../public/icon-show-sidebar.svg"
-import { testData } from "../config";
 export default function Sidebar(){
  let { data, } = useFetchDataFromDbQuery();
  console.log(data);
- data
- let boards: [] = [];
- data = {...boards};
+ 
  
  const [showSidebar, setShowSidebar] = useState<boolean>(true);
 
@@ -27,7 +24,6 @@ export default function Sidebar(){
  };
 
  const currentBoardIndex = useAppSelector(getActiveBoardIndex);
- data = testData;
  return(
   <>
    <div className="relative hidden md:block h-[35.91rem] ">

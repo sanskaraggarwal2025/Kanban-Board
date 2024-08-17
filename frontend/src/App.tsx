@@ -1,16 +1,22 @@
-import Sidebar from "./components/Sidebar";
-import Board from "./components/Board";
+
+import Login from "./components/Login";
+import Signup from "./components/Signup.tsx";
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Home from "./components/Home.tsx";
+
 function App() {
 
   return (
       <>
-      <div className="h-full">
-        <div className="md:flex h-full">
-        <Sidebar />
-        <Board />
-
-        </div>
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/' element={<Home />} />
+        </Routes>
+      </BrowserRouter>
+      
+      
         </>
   )
 }

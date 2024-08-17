@@ -86,7 +86,7 @@ boardRouter.get('/', async (c) => {
    },
   },
  });
- return c.json(boards);
+ return c.json([boards]);
 })
 
 boardRouter.put('/:id', async (c) => {

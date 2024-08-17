@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const fireStoreApi = createApi({
  reducerPath: "firestoreApi",
  baseQuery: fetchBaseQuery({
-  baseUrl: "http://localhost:5000/api", // Replace with your actual backend URL
+  baseUrl: "https://backend.sanskaraggarwal2025.workers.dev", // Replace with your actual backend URL
   prepareHeaders: (headers) => {
    // Retrieve the token from localStorage
    const token = localStorage.getItem("token"); // Replace 'token' with your actual key in localStorage
@@ -20,7 +20,7 @@ export const fireStoreApi = createApi({
   fetchDataFromDb: builder.query<{ [key: string]: any }[], void>({
    async queryFn() {
     try {
-     const response = await fetch("http://localhost:5000/api/tasks", {
+     const response = await fetch("https://backend.sanskaraggarwal2025.workers.dev/api/v1/board/", {
       method: "GET",
       headers: {
        Authorization: `Bearer ${localStorage.getItem("token")}`, // Fetch the token from localStorage
@@ -29,7 +29,14 @@ export const fireStoreApi = createApi({
      if (!response.ok) {
       throw new Error("Failed to fetch tasks");
      }
-     const data = await response.json();
+     let data = await response.json();
+     // console.log(data);
+     data = [
+      {
+       boards: data
+      }
+     ];
+     
      return { data };
     } catch (e: any) {
      return { error: e.message };
@@ -40,7 +47,7 @@ export const fireStoreApi = createApi({
   updateBoardToDb: builder.mutation({
    async queryFn(arg) {
     try {
-     const response = await fetch("http://localhost:5000/api/tasks", {
+     const response = await fetch("https://backend.sanskaraggarwal2025.workers.dev/api/tasks", {
       method: "PUT",
       headers: {
        "Content-Type": "application/json",
